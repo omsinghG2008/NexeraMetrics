@@ -1,0 +1,83 @@
+/* ==========================================================================
+   NEXERA · PAGE · SERVICES (services.html)
+   --------------------------------------------------------------------------
+   INDEX
+     1. Layout: sticky menu + service articles
+     2. A single service article
+     3. Profit calculator (inputs, results, breakdown)
+   ========================================================================== */
+@layer pages {
+
+  /* =======================================================================
+     1. LAYOUT  (the sticky .side-nav lives in components.css)
+     ======================================================================= */
+  .services-layout {
+    display: grid; gap: var(--s-7);
+    grid-template-columns: 14rem minmax(0, 1fr);
+    align-items: start;
+  }
+  @media (max-width: 56rem) { .services-layout { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); } }
+
+  /* =======================================================================
+     2. A SINGLE SERVICE
+     Three blocks, each visually different so they are easy to tell apart:
+       included  → ticked list      you receive → blue deliverable chips
+       we need   → marigold-tinted note
+     ======================================================================= */
+  .service { padding-block: var(--s-7); border-top: 1px solid var(--c-line); }
+  .service:first-child { border-top: 0; padding-top: 0; }
+  .service__head h2 { font-size: var(--step-3); transition: color var(--dur-fast); }
+  .service:hover .service__head h2 { color: var(--c-blue-dark); }
+  .service__head p { margin-top: var(--s-2); font-size: var(--step-1); color: var(--c-slate); }
+
+  .service__spec {
+    display: grid; gap: var(--s-5) var(--s-6); margin-top: var(--s-5);
+    grid-template-columns: 1.3fr 1fr;
+  }
+  .service__block h3 { margin-bottom: var(--s-3); font: 600 1rem var(--font-body); letter-spacing: 0; color: var(--c-ink); }
+  .service__block--need {
+    grid-column: 1 / -1; padding: var(--s-4) var(--s-5);
+    background: var(--c-marigold-wash); border-radius: var(--r-md);
+  }
+  .service__block--need h3 { margin-bottom: var(--s-1); }
+  .service__block--need p { color: var(--c-ink); }
+  @media (max-width: 40rem) { .service__spec { grid-template-columns: minmax(0, 1fr); } }
+
+  /* =======================================================================
+     3. PROFIT CALCULATOR
+     ======================================================================= */
+  .calc { display: grid; gap: var(--s-6); grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: start; }
+  @media (max-width: 56rem) { .calc { grid-template-columns: minmax(0, 1fr); } }
+  .calc__results { display: grid; gap: var(--s-5); }
+
+  /* Result tiles. Net profit is the key figure and gets a stronger look. */
+  .results { display: grid; gap: var(--s-3); grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* 3 × 3 */
+  @media (max-width: 30rem) { .results { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .result { padding: var(--s-4); background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-md); }
+  .result dt { font-size: var(--step--1); color: var(--c-slate); }
+  .result dd { margin-top: var(--s-1); font: 700 1.35rem/1.2 var(--font-display); color: var(--c-ink); }
+  .result--key { background: var(--c-blue-wash); border-color: rgb(35 70 217 / 30%); }
+  .result--key dd { font-size: 1.6rem; color: var(--c-blue-dark); }
+  .result dd .is-negative, .result dd.is-negative { color: var(--c-bad); }
+  output { display: inline; }
+  output.is-negative { color: var(--c-bad); }
+
+  /* "Where the money goes": one horizontal bar per cost, scaled to revenue. */
+  .breakdown { list-style: none; padding: 0; display: grid; gap: var(--s-3); }
+  .breakdown__row {
+    display: grid; align-items: center; gap: var(--s-3);
+    grid-template-columns: 11rem minmax(0, 1fr) 5.5rem;
+    max-width: none; font-size: 0.95rem;
+  }
+  .breakdown__track { height: 0.75rem; background: var(--c-tint); border-radius: var(--r-pill); overflow: hidden; }
+  .breakdown__fill {
+    display: block; width: var(--w, 0%); height: 100%; border-radius: inherit;
+    background: var(--c-line-strong); transition: width var(--dur-med) var(--ease), filter var(--dur-fast);
+  }
+  .breakdown__row:hover .breakdown__fill { filter: brightness(0.9) saturate(1.3); }
+  .breakdown__row:hover .breakdown__value { color: var(--c-blue-dark); }
+  .breakdown__row[data-part="profit"] .breakdown__fill { background: var(--c-teal); }
+  .breakdown__row[data-part="ads"] .breakdown__fill    { background: var(--c-marigold); }
+  .breakdown__value { text-align: right; font-weight: 600; }
+  @media (max-width: 36rem) { .breakdown__row { grid-template-columns: 1fr 5rem; } .breakdown__track { grid-column: 1 / -1; order: 3; } }
+}

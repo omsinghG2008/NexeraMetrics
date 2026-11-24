@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- ====================================================================
+       HEAD · basics
+       ==================================================================== -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Company | About NEXERA, Team and Technology</title>
+    <meta
+      name="description"
+      content="Learn about NEXERA, an India-based e-commerce research agency: our mission, team, working principles and technology ecosystem."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#F5F7FA" />
+
+    <!-- Canonical + language alternates (add hreflang="hi" here once Hindi pages exist) -->
+    <link rel="canonical" href="https://www.nexera.example/company.html" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.nexera.example/company.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.nexera.example/company.html"
+    />
+
+    <!-- Open Graph + Twitter cards (what link previews show) -->
+    <meta property="og:site_name" content="NEXERA" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Company | About NEXERA, Team and Technology"
+    />
+    <meta
+      property="og:description"
+      content="Learn about NEXERA, an India-based e-commerce research agency: our mission, team, working principles and technology ecosystem."
+    />
+    <meta property="og:url" content="https://www.nexera.example/company.html" />
+    <meta
+      property="og:image"
+      content="https://www.nexera.example/assets/img/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="NEXERA: enter the next era of intelligence"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Icons and web app manifest -->
+    <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="assets/img/favicon.png" sizes="64x64" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <!-- Marks the page as "JavaScript available" so CSS can enable the mobile menu -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <!-- Fonts: Michroma (headings, matches the logo lettering) + Figtree (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      try {
+        if (sessionStorage.getItem("nx-bg-ok"))
+          document.documentElement.classList.add("bg-live");
+      } catch (e) {}
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Michroma&family=Figtree:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Styles: tokens → base → layout → components → this page -->
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages/company.css" />
+
+    <!-- Analytics / Search Console: paste the GA4 snippet and the verification meta tag here -->
+
+    <!-- Structured data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.nexera.example/#organization",
+            "name": "NEXERA",
+            "url": "https://www.nexera.example/",
+            "logo": "https://www.nexera.example/assets/img/logo-lockup.png",
+            "image": "https://www.nexera.example/assets/img/og-image.png",
+            "email": "nexerasupport01@gmail.com",
+            "founder": {
+              "@type": "Person",
+              "name": "Om Singh"
+            },
+            "areaServed": "Worldwide",
+            "slogan": "Enter the Next Era of Intelligence.",
+            "telephone": "+919520903782",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "IN"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.nexera.example/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Company",
+                "item": "https://www.nexera.example/company.html"
+              }
+            ]
+          },
+          {
+            "@type": "AboutPage",
+            "name": "About NEXERA",
+            "url": "https://www.nexera.example/company.html",
+            "about": {
+              "@id": "https://www.nexera.example/#organization"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body class="page-company">
+    <!-- @partial header:start -->
+<!-- ======================================================================
+     SHARED PARTIAL · SITE HEADER
+     Edit THIS file, then run:  python3 tools/sync-partials.py
+     The script copies it into every page and marks the current page.
+     ====================================================================== -->
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <!-- Reading-progress line (decorative; animated by js/nav.js) -->
+  <span class="scroll-progress" aria-hidden="true"></span>
+
+  <div class="site-header__bar container">
+
+    <!-- Brand: NEXERA logo (mark + wordmark), links home -->
+    <a class="brand" href="index.html" aria-label="NEXERA, go to the home page">
+      <img class="brand__logo" src="assets/img/logo-lockup.png" alt="" width="205" height="40">
+    </a>
+
+    <!-- Mobile menu button (shown only on small screens when JavaScript is on) -->
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle__label">Menu</span>
+    </button>
+
+    <!-- Primary navigation -->
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+      <ul class="primary-nav__list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="company.html" aria-current="page">Company</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a class="btn btn--primary btn--sm" href="contact.html#enquiry">Request a brief</a>
+    </nav>
+
+  </div>
+</header>
+<!-- @partial header:end -->
+
+    <main id="main">
+      <!-- ====================================================================
+       PAGE HEADER · breadcrumb, title, intro
+       ==================================================================== -->
+      <section class="page-hero" aria-labelledby="page-title">
+        <div class="container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="index.html">Home</a></li>
+              <li aria-current="page">Company</li>
+            </ol>
+          </nav>
+          <h1 id="page-title">About NEXERA</h1>
+          <p class="page-hero__lead">
+            An India-based research and analytics agency serving e-commerce
+            sellers around the world.
+          </p>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+       WHO WE ARE
+       ==================================================================== -->
+      <section class="section" aria-labelledby="who-title">
+        <div class="container split">
+          <div class="stack">
+            <h2 id="who-title">Who we are</h2>
+            <p>
+              NEXERA was founded by Om Singh to give online sellers the kind of
+              structured product research that large brands buy from consulting
+              firms. We combine marketplace research, review analytics and
+              financial modelling in one engagement.
+            </p>
+            <p>
+              EDIT: add founding year, company registration and your story here.
+            </p>
+            <h3>Mission</h3>
+            <p>
+              Help sellers avoid costly product mistakes by making market
+              evidence clear and affordable.
+            </p>
+          </div>
+          <img
+            class="media"
+            src="assets/img/placeholder-image.svg"
+            alt="Office or team image (placeholder)"
+            width="800"
+            height="500"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- ====================================================================
+       HOW WE WORK · four principles
+       ==================================================================== -->
+      <section class="section section--tint" aria-labelledby="values-title">
+        <div class="container">
+          <header class="section-head">
+            <h2 id="values-title">How we work</h2>
+          </header>
+          <ul class="auto-grid auto-grid--sm" role="list">
+            <li class="card">
+              <h3>Evidence first</h3>
+              <p>Every conclusion points to data we can show you.</p>
+            </li>
+            <li class="card">
+              <h3>Clear assumptions</h3>
+              <p>Estimates are labelled and limits are stated.</p>
+            </li>
+            <li class="card">
+              <h3>Confidentiality</h3>
+              <p>Your brief, products and numbers stay private.</p>
+            </li>
+            <li class="card">
+              <h3>Plain language</h3>
+              <p>Reports are written to be understood, not to impress.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+       TEAM · two founders first, then the wider team
+       ==================================================================== -->
+      <section class="section" id="team" aria-labelledby="team-title">
+        <div class="container">
+          <header class="section-head">
+            <h2 id="team-title">Our team</h2>
+            <p>
+              Five people covering research, analytics, development and design.
+              Replace <code>placeholder-person.svg</code> with each person's
+              photo and update the portfolio links.
+            </p>
+          </header>
+          <ul class="team">
+            <!-- Team member · Om Singh -->
+            <li class="team__item team__item--lead">
+              <article class="member" aria-labelledby="member-om">
+                <img
+                  class="member__photo"
+                  src="assets/omsingh.jpeg"
+                  alt="Photo of Om Singh"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                />
+                <h3 id="member-om">Om Singh</h3>
+                <p class="member__role">Founder</p>
+                <ul class="chip-list">
+                  <li class="chip">Full-stack development</li>
+                  <li class="chip">Research</li>
+                  <li class="chip">Data analysis</li>
+                  <li class="chip">Trading & Investments</li>
+                  <li class="chip">Market and financial analytics</li>
+                  <li class="chip">Prompt engineering</li>
+                  <li class="chip">UI & UX Designing</li>
+                </ul>
+                <p class="member__link">
+                  <a
+                    href="https://omsinghportfolio.web.app/"
+                    rel="noopener"
+                    target="_blank"
+                    >Om's portfolio</a
+                  >
+                </p>
+              </article>
+            </li>
+            <!-- Team member · Aliza -->
+            <li class="team__item team__item--lead">
+              <article class="member" aria-labelledby="member-aliza">
+                <img
+                  class="member__photo"
+                  src="assets/zuz.jpg"
+                  alt="Photo of Aliza (placeholder)"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                />
+                <h3 id="member-aliza">Aliza</h3>
+                <p class="member__role">Co-Founder</p>
+                <ul class="chip-list">
+                  <li class="chip">Frontend development</li>
+                  <li class="chip">Research</li>
+                  <li class="chip">Prompt engineering</li>
+                </ul>
+                <br>
+                <p class="member__link">
+                  <a
+                    href="https://alizafatima.netlify.app/"
+                    rel="noopener"
+                    target="_blank"
+                    >Aliza's portfolio</a
+                  >
+                </p>
+              </article>
+            </li>
+            <!-- Team member · Lakshay Singh -->
+            <li class="team__item">
+              <article class="member" aria-labelledby="member-lakshay">
+                <img
+                  class="member__photo"
+                  src="assets/lksh.jpeg"
+                  alt="Photo of Lakshay Singh (placeholder)"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                />
+                <h3 id="member-lakshay">Lakshay Singh</h3>
+                <p class="member__role">Assistant</p>
+                <ul class="chip-list">
+                  <li class="chip">Basic development</li>
+                  <li class="chip">Research</li>
+                  <li class="chip">Task handling</li>
+                </ul>
+                <p class="member__link">
+                  <a
+                    href="https://example.com/lakshay"
+                    rel="noopener"
+                    target="_blank"
+                    >EDIT: Lakshay's portfolio website</a
+                  >
+                </p>
+              </article>
+            </li>
+            <!-- Team member · Annu Vardhan -->
+            <li class="team__item">
+              <article class="member" aria-labelledby="member-annu">
+                <img
+                  class="member__photo"
+                  src="assets/img/annu.jpeg"
+                  alt="Photo of Annu Vardhan (placeholder)"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                />
+                <h3 id="member-annu">Annu Vardhan</h3>
+                <p class="member__role">Editor and UI/UX Designer</p>
+                <ul class="chip-list">
+                  <li class="chip">Motion Graphics</li>
+                  <li class="chip">UI Designing</li>
+                </ul>
+                <p class="member__link">
+                  <a
+                    href="https://example.com/annu"
+                    rel="noopener"
+                    target="_blank"
+                    >EDIT: Annu's portfolio website</a
+                  >
+                </p>
+              </article>
+            </li>
+            <!-- Team member · Ranu Meena -->
+            <li class="team__item">
+              <article class="member" aria-labelledby="member-ranu">
+                <img
+                  class="member__photo"
+                  src="assets/img/shruti.jpeg"
+                  alt="Photo of Ranu Meena (placeholder)"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                />
+                <h3 id="member-ranu">Ranu Meena</h3>
+                <p class="member__role">Junior Researcher</p>
+                <ul class="chip-list">
+                  <li class="chip">Research support and data collection</li>
+                </ul>
+                <p class="member__link">
+                  <a
+                    href="https://example.com/ranu"
+                    rel="noopener"
+                    target="_blank"
+                    >EDIT: Ranu's portfolio website</a
+                  >
+                </p>
+              </article>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+       TECHNOLOGY ECOSYSTEM
+       Skills are split into three colour-coded groups. Inside each group,
+       every skill lists its TOOLS (named software, solid chips) and its
+       METHODS (how we work, outlined chips).
+       ==================================================================== -->
+      <section
+        class="section section--white"
+        id="technology"
+        aria-labelledby="tech-title"
+      >
+        <div class="container">
+          <header class="section-head">
+            <h2 id="tech-title">Technology ecosystem</h2>
+            <p>
+              The research tools, data sources and working methods that
+              professional research teams rely on, and that we use on every
+              engagement. Tool names belong to their owners; no partnership or
+              endorsement is implied.
+            </p>
+          </header>
+
+          <!-- How to read this section -->
+          <aside class="legend" aria-label="How to read the skill lists">
+            <p>
+              <span class="chip chip--blue chip--tool">Tool</span> a named app,
+              website or platform
+            </p>
+            <p>
+              <span class="chip chip--method">Method</span> a way of working or
+              a type of analysis
+            </p>
+          </aside>
+
+          <!-- Group filter (shown only when JavaScript is on) -->
+          <div
+            class="skill-filter"
+            data-skill-filter
+            role="group"
+            aria-label="Show skill group"
+          >
+            <button type="button" data-filter="all" aria-pressed="true">
+              All groups
+            </button>
+            <button type="button" data-filter="research" aria-pressed="false">
+              Research
+            </button>
+            <button type="button" data-filter="analysis" aria-pressed="false">
+              Data and AI
+            </button>
+            <button type="button" data-filter="workflow" aria-pressed="false">
+              Workflow
+            </button>
+          </div>
+          <p class="sr-only" role="status" data-filter-status></p>
+
+          <div class="skill-groups">
+            <!-- Skill group · Research and intelligence -->
+            <section
+              class="skill-group skill-group--research"
+              data-skill-group="research"
+              aria-labelledby="sg-research"
+            >
+              <header class="skill-group__head">
+                <svg
+                  class="skill-group__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <circle cx="10.5" cy="10.5" r="6" />
+                  <path d="m15 15 5 5" />
+                </svg>
+                <h3 id="sg-research">Research and intelligence</h3>
+                <p>
+                  How we find the evidence: marketplace data, demand trends,
+                  rival activity, buyer voice and suppliers.
+                </p>
+              </header>
+              <ul class="skill-list">
+                <!-- Skill · Product and marketplace research -->
+                <li class="skill">
+                  <h4 class="skill__name">Product and marketplace research</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--blue chip--tool">Helium 10</li>
+                          <li class="chip chip--blue chip--tool">
+                            Jungle Scout
+                          </li>
+                          <li class="chip chip--blue chip--tool">Keepa</li>
+                          <li class="chip chip--blue chip--tool">
+                            SellerSprite
+                          </li>
+                          <li class="chip chip--blue chip--tool">
+                            Amazon Brand Analytics
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">Keyword research</li>
+                          <li class="chip chip--method">Sales-rank tracking</li>
+                          <li class="chip chip--method">
+                            Price-history analysis
+                          </li>
+                          <li class="chip chip--method">Listing audits</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · Demand and trend intelligence -->
+                <li class="skill">
+                  <h4 class="skill__name">Demand and trend intelligence</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--blue chip--tool">
+                            Google Trends
+                          </li>
+                          <li class="chip chip--blue chip--tool">
+                            Google Keyword Planner
+                          </li>
+                          <li class="chip chip--blue chip--tool">
+                            Exploding Topics
+                          </li>
+                          <li class="chip chip--blue chip--tool">
+                            Pinterest Trends
+                          </li>
+                          <li class="chip chip--blue chip--tool">
+                            TikTok Creative Center
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">
+                            Search-trend analysis
+                          </li>
+                          <li class="chip chip--method">
+                            Seasonality research
+                          </li>
+                          <li class="chip chip--method">Category sizing</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · Competitor and traffic analysis -->
+                <li class="skill">
+                  <h4 class="skill__name">Competitor and traffic analysis</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--blue chip--tool">Semrush</li>
+                          <li class="chip chip--blue chip--tool">Similarweb</li>
+                          <li class="chip chip--blue chip--tool">Ahrefs</li>
+                          <li class="chip chip--blue chip--tool">
+                            Meta Ad Library
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">Pricing audits</li>
+                          <li class="chip chip--method">
+                            Brand and positioning review
+                          </li>
+                          <li class="chip chip--method">
+                            Advertising observation
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · Customer voice and review mining -->
+                <li class="skill">
+                  <h4 class="skill__name">Customer voice and review mining</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--blue chip--tool">Reddit</li>
+                          <li class="chip chip--blue chip--tool">Trustpilot</li>
+                          <li class="chip chip--blue chip--tool">Apify</li>
+                          <li class="chip chip--blue chip--tool">Octoparse</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">
+                            Sentiment and theme analysis
+                          </li>
+                          <li class="chip chip--method">
+                            Review quality checks
+                          </li>
+                          <li class="chip chip--method">
+                            Voice-of-customer coding
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · Supplier and trade research -->
+                <li class="skill">
+                  <h4 class="skill__name">Supplier and trade research</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--blue chip--tool">Alibaba</li>
+                          <li class="chip chip--blue chip--tool">IndiaMART</li>
+                          <li class="chip chip--blue chip--tool">
+                            Global Sources
+                          </li>
+                          <li class="chip chip--blue chip--tool">ImportYeti</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">Supplier vetting</li>
+                          <li class="chip chip--method">
+                            Landed-cost research
+                          </li>
+                          <li class="chip chip--method">
+                            MOQ and lead-time comparison
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+              </ul>
+            </section>
+
+            <!-- Skill group · Data, AI and analysis -->
+            <section
+              class="skill-group skill-group--analysis"
+              data-skill-group="analysis"
+              aria-labelledby="sg-analysis"
+            >
+              <header class="skill-group__head">
+                <svg
+                  class="skill-group__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M4 20V4M4 20h16" />
+                  <path d="m7 15 4-4 3 3 5-6" />
+                </svg>
+                <h3 id="sg-analysis">Data, AI and analysis</h3>
+                <p>
+                  How we turn raw findings into numbers, charts and clear
+                  answers.
+                </p>
+              </header>
+              <ul class="skill-list">
+                <!-- Skill · Spreadsheets and modelling -->
+                <li class="skill">
+                  <h4 class="skill__name">Spreadsheets and modelling</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--teal chip--tool">
+                            Google Sheets
+                          </li>
+                          <li class="chip chip--teal chip--tool">
+                            Microsoft Excel
+                          </li>
+                          <li class="chip chip--teal chip--tool">Airtable</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">
+                            Unit-economics modelling
+                          </li>
+                          <li class="chip chip--method">
+                            Scenario and sensitivity analysis
+                          </li>
+                          <li class="chip chip--method">Forecasting</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · Dashboards and visualisation -->
+                <li class="skill">
+                  <h4 class="skill__name">Dashboards and visualisation</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--teal chip--tool">
+                            Looker Studio
+                          </li>
+                          <li class="chip chip--teal chip--tool">Power BI</li>
+                          <li class="chip chip--teal chip--tool">Tableau</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">KPI dashboards</li>
+                          <li class="chip chip--method">
+                            Cohort and trend charts
+                          </li>
+                          <li class="chip chip--method">Data-quality checks</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · AI research assistants -->
+                <li class="skill">
+                  <h4 class="skill__name">AI research assistants</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--teal chip--tool">ChatGPT</li>
+                          <li class="chip chip--teal chip--tool">Claude</li>
+                          <li class="chip chip--teal chip--tool">Perplexity</li>
+                          <li class="chip chip--teal chip--tool">NotebookLM</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">Prompt engineering</li>
+                          <li class="chip chip--method">
+                            Source-checked summaries
+                          </li>
+                          <li class="chip chip--method">Theme clustering</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+              </ul>
+            </section>
+
+            <!-- Skill group · Workflow and reporting -->
+            <section
+              class="skill-group skill-group--workflow"
+              data-skill-group="workflow"
+              aria-labelledby="sg-workflow"
+            >
+              <header class="skill-group__head">
+                <svg
+                  class="skill-group__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect x="4" y="4" width="16" height="16" rx="3" />
+                  <path d="m8 12 3 3 5-6" />
+                </svg>
+                <h3 id="sg-workflow">Workflow and reporting</h3>
+                <p>
+                  How the team stays organised, checks its work and delivers
+                  reports clients can act on.
+                </p>
+              </header>
+              <ul class="skill-list">
+                <!-- Skill · Knowledge and source management -->
+                <li class="skill">
+                  <h4 class="skill__name">Knowledge and source management</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--plum chip--tool">Notion</li>
+                          <li class="chip chip--plum chip--tool">Zotero</li>
+                          <li class="chip chip--plum chip--tool">
+                            Google Drive
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">Research logs</li>
+                          <li class="chip chip--method">Source logging</li>
+                          <li class="chip chip--method">Versioned findings</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · Team collaboration -->
+                <li class="skill">
+                  <h4 class="skill__name">Team collaboration</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--plum chip--tool">Slack</li>
+                          <li class="chip chip--plum chip--tool">Trello</li>
+                          <li class="chip chip--plum chip--tool">Miro</li>
+                          <li class="chip chip--plum chip--tool">
+                            Google Meet
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">
+                            Weekly research reviews
+                          </li>
+                          <li class="chip chip--method">Peer review</li>
+                          <li class="chip chip--method">Client check-ins</li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+                <!-- Skill · Report design and delivery -->
+                <li class="skill">
+                  <h4 class="skill__name">Report design and delivery</h4>
+                  <dl class="skill__rows">
+                    <div class="skill__row">
+                      <dt>Tools</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--plum chip--tool">Canva</li>
+                          <li class="chip chip--plum chip--tool">
+                            Google Docs
+                          </li>
+                          <li class="chip chip--plum chip--tool">
+                            Google Slides
+                          </li>
+                          <li class="chip chip--plum chip--tool">Loom</li>
+                        </ul>
+                      </dd>
+                    </div>
+                    <div class="skill__row">
+                      <dt>Methods</dt>
+                      <dd>
+                        <ul class="chip-list">
+                          <li class="chip chip--method">Executive summaries</li>
+                          <li class="chip chip--method">Evidence tables</li>
+                          <li class="chip chip--method">
+                            Plain-language writing
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+       DATA ETHICS + CAREERS
+       ==================================================================== -->
+      <section class="section" aria-label="Data ethics and careers">
+        <div class="container split split--top">
+          <article class="stack" aria-labelledby="ethics-title">
+            <h2 id="ethics-title">Data ethics</h2>
+            <p>
+              We use publicly available information, respect platform terms and
+              do not collect private personal data. Where data is incomplete we
+              say so in the report.
+            </p>
+          </article>
+          <article class="stack" aria-labelledby="careers-title">
+            <h2 id="careers-title">Careers</h2>
+            <p>
+              We hire researchers, developers and designers. Apply on the
+              <a href="contact.html#careers">contact page</a>.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+       CLOSING CALL TO ACTION
+       ==================================================================== -->
+      <section class="cta-band" aria-labelledby="cta-title">
+        <div class="container cta-band__inner">
+          <h2 id="cta-title">Tell us what you plan to sell</h2>
+          <p>
+            Share your product idea, market and budget. We reply with a written
+            scope and next steps.
+          </p>
+          <div class="cluster">
+            <a class="btn btn--primary" href="contact.html#enquiry"
+              >Request a research brief</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- @partial footer:start -->
+<!-- ======================================================================
+     SHARED PARTIAL · SITE FOOTER
+     Edit THIS file, then run:  python3 tools/sync-partials.py
+     Search for "EDIT:" to find details you still need to fill in.
+     ====================================================================== -->
+<footer class="site-footer">
+  <div class="container">
+
+    <div class="site-footer__grid">
+
+      <!-- About: logo, tagline, social links -->
+      <section class="site-footer__about" aria-labelledby="footer-about-title">
+        <a class="brand" href="index.html" aria-label="NEXERA, go to the home page">
+          <img class="brand__logo" src="assets/img/logo-lockup.png" alt="" width="205" height="40" loading="lazy">
+        </a>
+        <h2 class="sr-only" id="footer-about-title">About NEXERA</h2>
+        <p>Enter the Next Era of Intelligence. We research products, markets and competitors so e-commerce sellers can decide with evidence.</p>
+        <p>
+          <a href="https://linkedin.com/company/YOUR_PAGE" rel="noopener" target="_blank">LinkedIn</a>
+          &nbsp;·&nbsp;
+          <a href="https://instagram.com/YOUR_HANDLE" rel="noopener" target="_blank">Instagram</a>
+        </p>
+      </section>
+
+      <!-- Footer navigation: services -->
+      <nav aria-labelledby="footer-services-title">
+        <h2 class="site-footer__title" id="footer-services-title">Services</h2>
+        <ul>
+          <li><a href="services.html#product-research">Product research</a></li>
+          <li><a href="services.html#review-analytics">Review analytics</a></li>
+          <li><a href="services.html#competitor-intelligence">Competitor intelligence</a></li>
+          <li><a href="services.html#supplier-research">Supplier research</a></li>
+          <li><a href="services.html#profitability">Profitability analysis</a></li>
+          <li><a href="services.html#calculator">Profit calculator</a></li>
+        </ul>
+      </nav>
+
+      <!-- Footer navigation: company -->
+      <nav aria-labelledby="footer-company-title">
+        <h2 class="site-footer__title" id="footer-company-title">Company</h2>
+        <ul>
+          <li><a href="company.html">About NEXERA</a></li>
+          <li><a href="company.html#team">Our team</a></li>
+          <li><a href="company.html#technology">Technology</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html#careers">Careers</a></li>
+        </ul>
+      </nav>
+
+      <!-- Footer navigation: legal and help -->
+      <nav aria-labelledby="footer-help-title">
+        <h2 class="site-footer__title" id="footer-help-title">Legal and help</h2>
+        <ul>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="sitemap.xml">Sitemap</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact details (schema-friendly <address>) -->
+      <section aria-labelledby="footer-contact-title">
+        <h2 class="site-footer__title" id="footer-contact-title">Contact</h2>
+        <address>
+          <p><strong>Uttar Pradesh</strong><br>Agra, TCY, 282006<br>India</p>
+          <p><strong>Delhi</strong><br>Shardra, Janta Flat, 110093<br>India</p>
+          <p>
+            <a href="mailto:nexerasupport01@gmail.com">nexerasupport01@gmail.com</a><br>
+            <a href="tel:+919520903782">+91 9520903782</a><br>
+            Mon to Fri, 24/7
+          </p>
+        </address>
+      </section>
+
+    </div>
+
+    <!-- Legal line -->
+    <div class="site-footer__legal">
+      <p><small>&copy; 2026 NEXERA. All rights reserved.</small></p>
+      <p><small>Reports contain research estimates and are not financial, legal or tax advice.</small></p>
+    </div>
+
+  </div>
+</footer>
+<!-- @partial footer:end -->
+
+    <!-- Scripts (deferred so they never block rendering) -->
+    <script src="js/core.js" defer></script>
+    <script src="js/nav.js" defer></script>
+    <script src="js/motion.js" defer></script>
+    <script src="js/bg-webgl.js" defer></script>
+    <script src="js/skills-filter.js" defer></script>
+  </body>
+</html>

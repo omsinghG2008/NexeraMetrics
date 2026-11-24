@@ -1,0 +1,21 @@
+/* ==========================================================================
+   NEXERA · PAGE · PROJECTS (projects.html)
+   Case-study rows: image on one side, challenge / approach / outcome beside it.
+   ========================================================================== */
+@layer pages {
+  .cases { margin-top: var(--s-6); }
+  .case {
+    display: grid; gap: clamp(1.5rem, 5vw, 4rem); grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center;
+    padding-block: var(--s-7); border-top: 1px solid var(--c-line);
+  }
+  .case:nth-child(even) .media { order: 2; }              /* alternate image side for rhythm */
+  .case h2 { font-size: var(--step-3); }
+  .case__facts { display: grid; gap: var(--s-4); }
+  .case__facts dt { font: 600 1.05rem var(--font-display); transition: color var(--dur-fast); }
+  .case:hover .case__facts dt { color: var(--c-blue-dark); }
+  .case__facts dd { color: var(--c-slate); }
+  @media (max-width: 56rem) {
+    .case { grid-template-columns: minmax(0, 1fr); }
+    .case:nth-child(even) .media { order: 0; }
+  }
+}

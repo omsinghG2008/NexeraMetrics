@@ -1,0 +1,13 @@
+/* ==========================================================================
+   NEXERA · PAGE · 404 (404.html)
+   ========================================================================== */
+@layer pages {
+  .not-found { min-height: 60vh; display: grid; align-items: center; }
+  .not-found__code {
+    font: 800 clamp(5rem, 18vw, 11rem)/1 var(--font-display); letter-spacing: -0.02em;
+    color: var(--c-marigold);
+    display: inline-block; cursor: default;
+    transition: transform var(--dur-med) var(--ease-spring), color var(--dur-fast);
+  }
+  .not-found__code:hover { transform: scale(1.06) rotate(-3deg); color: var(--c-marigold-dark); }
+}
