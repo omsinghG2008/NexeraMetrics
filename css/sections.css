@@ -1,0 +1,142 @@
+/* ==========================================================================
+   NEXERA · css/sections.css
+   --------------------------------------------------------------------------
+   Styles for the sections added in the November revision. Kept in its own
+   file so nothing in tokens, base, hero or the background animation changes.
+
+   INDEX
+     1. Team (data-driven, any number of members)
+     2. 7-stage workflow
+     3. Offers (the three services)
+     4. Differentiators, "what you receive", "who this is for"
+     5. Methodology, illustrative sample, disclaimer
+     6. Offer detail blocks (services page)
+     7. Qualification form extras
+   Load order: tokens → base → layout → components → sections → pages/<page>
+   ========================================================================== */
+@layer components {
+
+  /* =======================================================================
+     1. TEAM  (the original card design, now drawn from js/team-data.js)
+     Flexible rows: cards wrap and an incomplete row is CENTRED, so any number
+     of members looks finished. "featured" members (founders) get a wide card.
+     ======================================================================= */
+  .team { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-6) var(--s-5); }
+  .team__item { flex: 0 1 calc((100% - 2 * var(--s-5)) / 3); min-width: min(100%, 15rem); }
+  .team__item--lead { flex-basis: calc((100% - var(--s-5)) / 2); min-width: min(100%, 18rem); }
+  .member > * + * { margin-top: var(--s-3); }
+  .member__photo, .member__avatar { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--r-lg); background: var(--c-blue-wash); transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease); }
+  .team__item--lead .member__photo, .team__item--lead .member__avatar { aspect-ratio: 16 / 10; }
+  .member__avatar { display: grid; place-items: center; color: var(--c-blue-dark); font: 700 3rem/1 var(--font-display); }
+  .member__role { font-weight: 600; color: var(--c-blue-dark); transition: letter-spacing var(--dur-med) var(--ease); }
+  .member__bio { font-size: var(--step--1); color: var(--c-slate); }
+  .member__link { font-size: var(--step--1); }
+  .member:hover .member__photo, .member:hover .member__avatar { transform: translateY(-5px) rotate(-0.8deg); box-shadow: var(--shadow-lift); }
+  .member:hover .member__role { letter-spacing: 0.02em; }
+  .is-placeholder { color: var(--c-slate); font-style: italic; }
+
+  /* =======================================================================
+     2. 7-STAGE WORKFLOW
+     Desktop: four columns, stage 7 spans two. Tablet: two columns.
+     Mobile: one column joined by a vertical line.
+     ======================================================================= */
+  .flow { list-style: none; padding: 0; counter-reset: stage; display: grid; gap: var(--s-6) var(--s-5); grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .flow__item { position: relative; counter-increment: stage; padding: var(--s-5); background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-lg); transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease), border-color var(--dur-fast); }
+  .flow__item:hover { transform: translateY(-4px); border-color: var(--c-blue); box-shadow: var(--shadow-lift); }
+  .flow__item::before {
+    content: counter(stage); display: grid; place-items: center; width: 2.4rem; height: 2.4rem; margin-bottom: var(--s-3);
+    border-radius: 50%; background: var(--c-ink); color: #fff; font: 700 0.95rem/1 var(--font-display);
+  }
+  .flow__item h3 { font-size: var(--step-1); margin-bottom: var(--s-2); }
+  .flow__item p { font-size: 0.95rem; color: var(--c-slate); }
+  .flow__item--final { grid-column: span 2; border-color: var(--c-marigold-dark); background: var(--c-marigold-wash); }
+  .flow__item--final::before { background: var(--c-marigold); color: var(--c-ink); }
+  /* connector between neighbouring stages in the same row */
+  .flow__item:not(:nth-child(4n)):not(:last-child)::after {
+    content: ""; position: absolute; top: calc(var(--s-5) + 1.2rem); left: calc(var(--s-5) + 2.4rem); width: calc(100% + var(--s-5) - 2.4rem); height: 2px;
+    background: linear-gradient(90deg, var(--c-ink), var(--c-line-strong)); z-index: 0; pointer-events: none;
+  }
+  @media (max-width: 64rem) {
+    .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .flow__item:not(:nth-child(4n)):not(:last-child)::after { display: none; }
+  }
+  @media (max-width: 40rem) {
+    .flow { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); }
+    .flow__item--final { grid-column: auto; }
+    /* vertical connector between stacked stages (every stage except the last) */
+    .flow__item:not(:nth-child(4n)):not(:last-child)::after,
+    .flow__item:nth-child(4n):not(:last-child)::after {
+      display: block; content: ""; position: absolute; left: calc(var(--s-5) + 1.2rem - 1px); top: 100%; width: 2px; height: var(--s-5);
+      background: var(--c-line-strong);
+    }
+  }
+
+  /* =======================================================================
+     3. OFFERS (three services)
+     ======================================================================= */
+  .offers { list-style: none; padding: 0; display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
+  .offer { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-5); background: var(--c-surface); border: 1px solid var(--c-line); border-top: 5px solid var(--c-marigold); border-radius: var(--r-lg); transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease); }
+  .offer:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+  .offer__tag { font: 700 var(--step--1)/1 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-slate); }
+  .offer h3 { font-size: var(--step-2); }
+  .offer__for { color: var(--c-slate); }
+  .offer ul { margin-top: auto; }
+  .offer .btn { align-self: flex-start; margin-top: var(--s-3); }
+
+  /* =======================================================================
+     4. DIFFERENTIATORS, RECEIVE, WHO IT IS FOR
+     ======================================================================= */
+  .feature-grid { list-style: none; padding: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+  .feature { padding: var(--s-5); background: var(--c-surface); border: 1px solid var(--c-line); border-left: 4px solid var(--c-blue); border-radius: var(--r-md); }
+  .feature h3 { font-size: var(--step-1); margin-bottom: var(--s-2); }
+  .feature p { font-size: 0.95rem; color: var(--c-slate); }
+
+  .audience { list-style: none; padding: 0; display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+  .audience li { padding: var(--s-5); background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-lg); }
+  .audience h3 { font-size: var(--step-1); margin-bottom: var(--s-2); }
+
+  /* =======================================================================
+     5. METHODOLOGY, SAMPLE, DISCLAIMER
+     ======================================================================= */
+  .method { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); list-style: none; padding: 0; }
+  .method li { padding: var(--s-4) var(--s-5); border-left: 4px solid var(--c-teal); background: var(--c-teal-wash); border-radius: var(--r-md); }
+  .method strong { display: block; margin-bottom: var(--s-1); }
+
+  .sample-flag { display: inline-block; padding: 0.3rem 0.8rem; border-radius: var(--r-pill); background: var(--c-marigold-wash); color: #6B4700; font-weight: 700; font-size: var(--step--1); border: 1px solid var(--c-marigold-dark); }
+  .sample-table { width: 100%; border-collapse: collapse; margin-top: var(--s-4); }
+  .sample-table th, .sample-table td { padding: var(--s-3) var(--s-4); text-align: left; vertical-align: top; border-top: 1px solid var(--c-line); }
+  .sample-table th { width: 11rem; font-weight: 700; color: var(--c-ink); }
+  .sample-table td { color: var(--c-slate); }
+  @media (max-width: 40rem) { .sample-table th, .sample-table td { display: block; width: auto; padding-inline: 0; } .sample-table th { border-bottom: 0; padding-bottom: 0; } .sample-table td { border-top: 0; } }
+
+  /* The one short disclaimer that sits next to report calls to action */
+  .disclaimer-short { max-width: 52ch; font-size: var(--step--1); color: var(--c-slate); }
+
+  /* =======================================================================
+     6. OFFER DETAIL BLOCKS (services page)
+     ======================================================================= */
+  .offer-facts { display: grid; gap: var(--s-4) var(--s-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-top: var(--s-4); }
+  .offer-facts h4 { font-size: var(--step-0); margin-bottom: var(--s-2); }
+  .offer-facts .check-list li, .offer-facts .cross-list li { margin-bottom: var(--s-2); }
+  .cross-list { list-style: none; padding: 0; }
+  .cross-list li { position: relative; padding-left: 1.6rem; color: var(--c-slate); }
+  .cross-list li::before { content: "\00D7"; position: absolute; left: 0.1rem; top: -0.05rem; font-weight: 700; font-size: 1.2rem; color: var(--c-bad); }
+  .turnaround { display: inline-block; padding: 0.35rem 0.9rem; border-radius: var(--r-pill); background: var(--c-blue-wash); color: var(--c-blue-dark); font-weight: 600; }
+
+  .measure { max-width: var(--measure); }
+  .facts { display: grid; gap: var(--s-3); margin-top: var(--s-3); }
+  .facts div { display: flex; justify-content: space-between; gap: var(--s-4); padding-bottom: var(--s-2); border-bottom: 1px solid var(--c-line); }
+  .facts dt { color: var(--c-slate); }
+  .facts dd { font-weight: 600; text-align: right; }
+  .plan__cta { margin-top: var(--s-5); }
+  .glance th a { color: inherit; }
+  .glance thead th { width: auto; }
+
+  /* =======================================================================
+     7. QUALIFICATION FORM EXTRAS
+     ======================================================================= */
+  .form-note { font-size: var(--step--1); color: var(--c-slate); }
+  .field__hint { font-size: var(--step--1); color: var(--c-slate); }
+  .form-grid { display: grid; gap: var(--s-4) var(--s-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  .form-grid .field--wide { grid-column: 1 / -1; }
+}

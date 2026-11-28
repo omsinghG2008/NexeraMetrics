@@ -1,21 +1,30 @@
 /* ==========================================================================
    NEXERA · js/forms.js
    --------------------------------------------------------------------------
-   Business-enquiry form and career-application form (contact page).
+   The qualification form on the contact page.
 
    What it does
-     - Checks each field that has data-rule="required|email|consent".
-     - Shows an error under the field and marks it aria-invalid.
-     - Blocks bots with a hidden "honeypot" field.
-     - Sends each form to your inbox by email (Web3Forms, no database needed).
-     - Supabase (database) support is still here for later: set
-       delivery: 'supabase' in CONFIG and re-add the resume file field.
-     - Until the chosen service is configured it runs in DEMO MODE: the form
-       works and says so, but nothing is sent.
+     1. Checks every field with data-rule="required|email|phone|consent",
+        shows the error under the field and marks it aria-invalid.
+     2. Cleans the text before sending (control characters and HTML tags are
+        removed, lengths are capped). Nothing typed here is ever inserted into
+        the page as HTML; messages are written with textContent only.
+     3. Blocks simple bots: a hidden honeypot field, a minimum fill time, and
+        Web3Forms' own bot check.
+     4. Rate-limits this browser (cooldown + hourly cap).
+     5. Pre-selects "Current stage" from ?stage=live|idea|launch|exploring,
+        which the service buttons add to the link.
+     6. Sends the message to the inbox through Web3Forms (no database needed).
 
-   SECURITY: only PUBLIC keys belong in this file (the Web3Forms access key
-   and the Supabase "anon" key). Never put a Supabase service_role key or any
-   password in front-end code.
+   Limits (be honest about them)
+     Browser-side checks make mistakes easy to fix and stop casual spam, but a
+     determined attacker can skip a browser. The real server-side checks are
+     the ones Web3Forms performs. For stronger protection (App Check, server
+     rate limits) see docs/SECURITY.md.
+
+   SECURITY: only PUBLIC values belong in this file. The Web3Forms access key
+   is public by design; restrict it to this domain in the Web3Forms dashboard.
+   Never put a password, token or private key here.
    ========================================================================== */
 (function () {
   'use strict';
@@ -23,31 +32,23 @@
 
   /* ---------- EDIT: your settings ---------- */
   const CONFIG = {
-    delivery: 'email',                                   // 'email' (inbox) or 'supabase' (database, for later)
-
-    /* Email delivery: create a free access key at web3forms.com using the inbox that should receive messages. */
-    emailAccessKey: 'f0e1abe0-8593-4987-b084-ac4df88bfd8a',
-    emailEndpoint: 'https://api.web3forms.com/submit',
-
-    /* Database delivery (not used right now): */
-    supabaseUrl: 'https://YOUR-PROJECT.supabase.co',
-    supabaseAnonKey: 'YOUR_PUBLIC_ANON_KEY',
-    resumeBucket: 'resumes',
-    fallbackEmail: 'nexerasupport01@gmail.com',     // shown if sending fails
-    maxResumeBytes: 5 * 1024 * 1024,                // 5 MB
+    accessKey: 'f0e1abe0-8593-4987-b084-ac4df88bfd8a',   // public Web3Forms key
+    endpoint: 'https://api.web3forms.com/submit',
+    minFillMs: 3000,           // faster than this = probably a bot
+    cooldownMs: 30 * 1000,     // wait between sends from one browser
+    maxPerHour: 3,             // sends per hour from one browser
+    storageKey: 'nx-form-sends',
+    maxLength: { name: 100, email: 150, whatsapp: 20, product: 150, budget: 60, message: 2000 },
   };
-  const isConfigured = CONFIG.delivery === 'email'
-    ? !CONFIG.emailAccessKey.includes('YOUR_WEB3FORMS')
-    : !CONFIG.supabaseUrl.includes('YOUR-PROJECT');
 
   /* ---------- Validation rules (return true, or the error message) ---------- */
   const RULES = {
     required: (v) => !!v.trim() || 'This field is required.',
-    email:    (v) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v) || 'Enter a valid email address.',
+    email:    (v) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim()) || 'Enter a valid email address.',
+    phone:    (v) => !v.trim() || /^\+?[0-9\s-]{8,18}$/.test(v.trim()) || 'Enter a valid phone number, or leave it empty.',
     consent:  (v) => !!v || 'Please accept the privacy policy.',
   };
 
-  /* Check every field with data-rule. Returns true when all pass. */
   function validate(form) {
     let allValid = true;
     $$('[data-rule]', form).forEach((field) => {
@@ -61,104 +62,105 @@
     return allValid;
   }
 
-  /* ---------- Tiny Supabase REST helper ---------- */
-  async function supabase(path, options) {
-    const response = await fetch(CONFIG.supabaseUrl + path, {
-      ...options,
-      headers: { apikey: CONFIG.supabaseAnonKey, Authorization: 'Bearer ' + CONFIG.supabaseAnonKey, ...(options.headers || {}) },
-    });
-    if (!response.ok) throw new Error(await response.text());
-    return response;
+  /* Remove control characters and HTML tags, collapse spaces, cap the length. */
+  function clean(value, max) {
+    return String(value)
+      .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
+      .replace(/<[^>]*>/g, '')
+      .replace(/[ \t]+/g, ' ')
+      .trim()
+      .slice(0, max);
   }
-  const JSON_HEADERS = { 'Content-Type': 'application/json', Prefer: 'return=minimal' };
-  const insert = (table, row) => supabase('/rest/v1/' + table, { method: 'POST', headers: JSON_HEADERS, body: JSON.stringify(row) });
 
-  /* ---------- Email helper: sends one message to your inbox ---------- */
-  async function sendEmail(subject, replyTo, fields) {
-    const response = await fetch(CONFIG.emailEndpoint, {
+  /* ---------- Per-browser rate limit ---------- */
+  function readSends() {
+    try {
+      const list = JSON.parse(localStorage.getItem(CONFIG.storageKey) || '[]');
+      return Array.isArray(list) ? list.filter((n) => Number.isFinite(n) && Date.now() - n < 3600 * 1000) : [];
+    } catch (e) { return []; }
+  }
+  function rateLimitMessage() {
+    const sends = readSends();
+    if (sends.length && Date.now() - sends[sends.length - 1] < CONFIG.cooldownMs) return 'Please wait a few seconds before sending another message.';
+    if (sends.length >= CONFIG.maxPerHour) return 'You have sent several messages recently. Please try again later.';
+    return '';
+  }
+  function recordSend() {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify([...readSends(), Date.now()])); } catch (e) { /* storage blocked: fine */ }
+  }
+
+  /* ---------- Send ---------- */
+  async function send(payload) {
+    const response = await fetch(CONFIG.endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ access_key: CONFIG.emailAccessKey, subject, from_name: 'NEXERA website', email: replyTo, ...fields }),
+      body: JSON.stringify(payload),
     });
     const result = await response.json().catch(() => ({}));
-    if (!response.ok || result.success === false) throw new Error(result.message || 'Email service error');
+    if (!response.ok || result.success === false) throw new Error('send failed');
   }
 
-  /* ---------- What each form sends: by email ---------- */
-  const EMAIL_SENDERS = {
-    'enquiry-form': (f) => sendEmail('New enquiry from ' + f.name.value, f.email.value, {
-      name: f.name.value, company: f.company.value, service: f.service.value, message: f.message.value,
-    }),
-    'career-form': (f) => sendEmail('New job application from ' + f.name.value, f.email.value, {
-      name: f.name.value, role: f.role.value, portfolio_link: f.portfolio.value,
-      resume_link: f.resumeLink ? f.resumeLink.value : '', message: f.message.value,
-    }),
-  };
-
-  /* ---------- What each form sends: to the database (for later) ---------- */
-  const SUPABASE_SENDERS = {
-    'enquiry-form': (f) => insert('enquiries', {
-      name: f.name.value, email: f.email.value, company: f.company.value,
-      service: f.service.value, message: f.message.value,
-    }),
-
-    'career-form': async (f) => {
-      const file = f.resume ? f.resume.files[0] : null;          // needs the resume file field back in contact.html
-      if (file && (file.size > CONFIG.maxResumeBytes || file.type !== 'application/pdf')) throw new Error('PDF under 5 MB only');
-      let resumePath = null;
-      if (file) {                                                  // upload the PDF to the private bucket first
-        resumePath = crypto.randomUUID() + '.pdf';
-        await supabase(`/storage/v1/object/${CONFIG.resumeBucket}/${resumePath}`, { method: 'POST', headers: { 'Content-Type': 'application/pdf' }, body: file });
-      }
-      return insert('applications', {
-        name: f.name.value, email: f.email.value, role: f.role.value,
-        portfolio_url: f.portfolio.value, message: f.message.value, resume_path: resumePath,
-      });
-    },
-  };
-
-  const SENDERS = CONFIG.delivery === 'email' ? EMAIL_SENDERS : SUPABASE_SENDERS;
-
-  /* ---------- Wire each form up ---------- */
-  function wire(form) {
-    const send = SENDERS[form.id];
+  NX.onReady(() => {
+    const form = $('#enquiry-form');
+    if (!form) return;
     const status = $('.form-status', form);
-    const button = $('button[type="submit"]', form);
-    const idleLabel = button.textContent;
+    const submit = $('button[type="submit"]', form);
+    const fallbackEmail = form.dataset.fallbackEmail || '';
+    const loadedAt = Date.now();
+
+    /* Pre-select the stage from ?stage=... */
+    const stage = new URLSearchParams(location.search).get('stage');
+    const stageField = $('#e-stage', form);
+    if (stage && stageField && $$('option', stageField).some((o) => o.value === stage)) stageField.value = stage;
+
+    const say = (text, ok) => {
+      status.textContent = text;                       // textContent: never parsed as HTML
+      status.classList.toggle('is-error', !ok);
+      status.classList.toggle('is-success', !!ok);
+    };
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (form.elements.website.value) return;                     // honeypot filled: it's a bot, do nothing
-
-      if (!validate(form)) {
-        status.className = 'form-status is-bad';
-        status.textContent = 'Please fix the highlighted fields.';
-        return;
-      }
-
-      button.disabled = true;
-      button.textContent = 'Sending…';
-      status.className = 'form-status';
       status.textContent = '';
+      if (!validate(form)) { say('Please fix the highlighted fields.', false); return; }
 
+      /* Bots: pretend it worked, send nothing. */
+      const honeypot = form.elements.website;
+      if ((honeypot && honeypot.value) || Date.now() - loadedAt < CONFIG.minFillMs) { say('Thank you. We usually reply within 1 business day.', true); form.reset(); return; }
+
+      const limited = rateLimitMessage();
+      if (limited) { say(limited, false); return; }
+
+      const f = form.elements;
+      const text = (name) => clean(f[name] ? f[name].value : '', CONFIG.maxLength[name] || 150);
+      const payload = {
+        access_key: CONFIG.accessKey,
+        subject: 'New NEXERA Metrics enquiry',
+        from_name: 'NEXERA Metrics website',
+        botcheck: '',
+        name: text('name'),
+        email: text('email'),
+        whatsapp: text('whatsapp'),
+        product_or_niche: text('product'),
+        marketplace: clean(f.marketplace.value, 60),
+        current_stage: clean(f.stage.selectedOptions[0] ? f.stage.selectedOptions[0].text : '', 80),
+        main_problem: clean(f.problem.value, 80),
+        budget: text('budget'),
+        message: text('message'),
+      };
+
+      submit.disabled = true;
+      say('Sending…', true);
       try {
-        if (isConfigured) await send(form);
-        else await new Promise((resolve) => setTimeout(resolve, 900));     // demo mode
-        status.className = 'form-status is-ok';
-        status.textContent = isConfigured
-          ? 'Thank you. We received your message and will reply by email.'
-          : 'Demo mode: the form works, but delivery is not configured yet, so nothing was sent.';
+        await send(payload);
+        recordSend();
         form.reset();
+        say('Thank you. Your message has been sent. We usually reply within 1 business day.', true);
       } catch (error) {
-        console.error(error);
-        status.className = 'form-status is-bad';
-        status.textContent = 'We could not send that. Please email ' + CONFIG.fallbackEmail + '.';
+        say(fallbackEmail ? 'Sorry, that did not send. Please email us at ' + fallbackEmail + '.' : 'Sorry, that did not send. Please try again.', false);
+      } finally {
+        submit.disabled = false;
       }
-
-      button.disabled = false;
-      button.textContent = idleLabel;
     });
-  }
-
-  NX.onReady(() => { Object.keys(SENDERS).forEach((id) => { const form = document.getElementById(id); if (form) wire(form); }); });
+  });
 })();

@@ -1,0 +1,47 @@
+# NEXERA Metrics
+
+> NEXERA Metrics (also written Nexera, NexeraMetrics) is an India-based e-commerce research agency founded by Om Singh. It helps sellers in India make data-backed decisions on product, sourcing, pricing and launch for Amazon India, Flipkart, Meesho and other Indian marketplaces.
+
+## About
+- Founder: Om Singh. Team page: https://nexerametrics.web.app/company.html#team
+- Offices: Shahdara, Janta Flats, Delhi 110093; Agra, Trans Yamuna Colony, Uttar Pradesh 282006.
+- Web Division (separate site, built web projects, not the research service): https://nexerawebs.web.app
+- Contact: nexerametrics@gmail.com
+- Hours: Mon to Sat, 10:00 AM-7:00 PM IST. We usually reply within 1 business day.
+
+## Three research offers
+- Existing Product Profit Fix: for sellers whose product sells but profit is thin or falling. https://nexerametrics.web.app/services.html#profit-fix
+- Single Product Validation: for one product idea that needs a go, fix or no-go decision. https://nexerametrics.web.app/services.html#product-validation
+- Full Launch / Expansion: for sellers launching or adding products, categories or marketplaces. https://nexerametrics.web.app/services.html#launch-expansion
+
+## The 7-stage research workflow
+1. Understand: the product, the seller and the decision to be made.
+2. Find: candidate products, competitors and sources.
+3. Check demand: search interest, seasonality and festival timing.
+4. Study market: competitors, prices, listings and buyer reviews.
+5. Check suppliers: verification, minimum order, lead time and terms.
+6. Calculate costs: landed cost, marketplace fees, GST-aware margins, COD and RTO losses.
+7. Recommend: a clear go, fix or no-go with risks and next steps.
+Details: https://nexerametrics.web.app/company.html#workflow
+
+## India-first capabilities
+- Festival and seasonality planning
+- Marketplace fee and GST-aware margin framing (not tax advice)
+- COD and RTO (return to origin) loss awareness
+- Supplier verification checks
+- Bulk review analysis using custom-built review-import tooling
+
+## Pages
+- Home: https://nexerametrics.web.app/
+- Services: https://nexerametrics.web.app/services.html
+- Company and team: https://nexerametrics.web.app/company.html
+- Projects (examples of the work): https://nexerametrics.web.app/projects.html
+- Contact: https://nexerametrics.web.app/contact.html
+- Privacy policy: https://nexerametrics.web.app/privacy.html
+- Terms of service: https://nexerametrics.web.app/terms.html
+
+## Limitations
+- Research reports contain estimates and assumptions. They support decision-making but do not guarantee sales, profit or business outcomes.
+- Reports are not financial, legal or tax advice.
+- Project descriptions on the Projects page are representative examples. NEXERA Metrics does not publish client names, reports or research.
+- NEXERA Metrics is independent of Amazon, Flipkart and Meesho.

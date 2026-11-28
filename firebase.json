@@ -1,0 +1,50 @@
+{
+  "hosting": {
+    "public": ".",
+    "cleanUrls": false,
+    "trailingSlash": false,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "README.md",
+      "docs/**",
+      "tools/**",
+      "partials/**",
+      "security/**",
+      "_unused/**",
+      "js/team-render.test.*"
+    ],
+    "redirects": [
+      { "source": "/services", "destination": "/services.html", "type": 301 },
+      { "source": "/company", "destination": "/company.html", "type": 301 },
+      { "source": "/projects", "destination": "/projects.html", "type": 301 },
+      { "source": "/contact", "destination": "/contact.html", "type": 301 },
+      { "source": "/privacy", "destination": "/privacy.html", "type": 301 },
+      { "source": "/terms", "destination": "/terms.html", "type": 301 },
+      { "source": "/index.html", "destination": "/", "type": 301 }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'sha256-/x7W7R75k8Roq0WaVRQX9blP4OufE5xbAdzklGxsgpw=' 'sha256-PaEq50ssaXrR2AzpbQlIVan4f1e4OOEa6MSo/Np0d7s=' 'sha256-ZnYJX5ypMaaAhxxWhSEjbMkhO2A9yPmbzEQH3LFaITA=' 'sha256-OZGLY403ngYdu3oFuSuzgD75UKmQn15zR4GuBAXzD0c=' 'sha256-DecT6V5D3tn/7toutD/0b7zpAaaCbG26q7BxpOKylrg='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" },
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+          { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
+          { "key": "X-Frame-Options", "value": "DENY" },
+          { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+          { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js|png|jpg|jpeg|webp|svg|woff2|ico)",
+        "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }]
+      },
+      {
+        "source": "**/*.html",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      }
+    ]
+  }
+}

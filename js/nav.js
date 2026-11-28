@@ -4,7 +4,7 @@
    1. Mobile menu (open / close, Escape key, closes on link click)
    2. Reading-progress line + "is-scrolled" shadow on the header
    3. Scroll-spy: highlights the in-page link for the section in view
-      (add data-scrollspy to a <nav> whose links are #anchors)
+      (add data-scrollspy to each <nav> whose links are #anchors; any number per page)
    4. Smooth anchor scrolling: in-page links glide with an eased curve
    5. Page-leave fade: only for browsers without cross-page transitions
    ========================================================================== */
@@ -56,25 +56,27 @@
   }
 
   /* ---------- 3. Scroll-spy ---------- */
+  /* Every <nav data-scrollspy> works on its own, so one page can hold several menus
+     (the Services page has one per core plan, plus one for the workflow). */
   function initScrollSpy() {
-    const nav = $('[data-scrollspy]');
-    if (!nav || !('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)) return;
+    $$('[data-scrollspy]').forEach((nav) => {
+      const links = $$('a[href^="#"]', nav);
+      const targets = links.map((a) => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
 
-    const links = $$('a[href^="#"]', nav);
-    const targets = links.map((a) => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        links.forEach((a) => {
-          const active = a.getAttribute('href') === '#' + entry.target.id;
-          if (active) a.setAttribute('aria-current', 'location');
-          else a.removeAttribute('aria-current');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          links.forEach((a) => {
+            const active = a.getAttribute('href') === '#' + entry.target.id;
+            if (active) a.setAttribute('aria-current', 'location');
+            else a.removeAttribute('aria-current');
+          });
         });
-      });
-    }, { rootMargin: '-35% 0px -60% 0px' });                      // the band just above the middle of the screen
+      }, { rootMargin: '-35% 0px -60% 0px' });                      // the band just above the middle of the screen
 
-    targets.forEach((section) => observer.observe(section));
+      targets.forEach((section) => observer.observe(section));
+    });
   }
 
   /* ---------- 4. Smooth anchor scrolling ---------- */

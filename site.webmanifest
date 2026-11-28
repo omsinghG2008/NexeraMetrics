@@ -1,7 +1,8 @@
 {
-  "name": "NEXERA",
+  "name": "NEXERA Metrics",
   "short_name": "NEXERA",
-  "description": "E-commerce product research, market intelligence and analytics.",
+  "description": "E-commerce product research for Indian sellers.",
+  "lang": "en-IN",
   "start_url": "/",
   "display": "browser",
   "background_color": "#000000",

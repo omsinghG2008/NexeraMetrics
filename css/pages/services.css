@@ -4,7 +4,9 @@
    INDEX
      1. Layout: sticky menu + service articles
      2. A single service article
-     3. Profit calculator (inputs, results, breakdown)
+     3. Core plans: overview cards, plan header, scope steps, callouts
+     4. Workflow stages (auto-numbered)
+     5. Profit calculator (inputs, results, breakdown)
    ========================================================================== */
 @layer pages {
 
@@ -26,25 +28,87 @@
      ======================================================================= */
   .service { padding-block: var(--s-7); border-top: 1px solid var(--c-line); }
   .service:first-child { border-top: 0; padding-top: 0; }
-  .service__head h2 { font-size: var(--step-3); transition: color var(--dur-fast); }
-  .service:hover .service__head h2 { color: var(--c-blue-dark); }
+  .service__head :is(h2, h3) { font-size: var(--step-3); transition: color var(--dur-fast); }
+  .service:hover .service__head :is(h2, h3) { color: var(--c-blue-dark); }
   .service__head p { margin-top: var(--s-2); font-size: var(--step-1); color: var(--c-slate); }
 
   .service__spec {
     display: grid; gap: var(--s-5) var(--s-6); margin-top: var(--s-5);
     grid-template-columns: 1.3fr 1fr;
   }
-  .service__block h3 { margin-bottom: var(--s-3); font: 600 1rem var(--font-body); letter-spacing: 0; color: var(--c-ink); }
+  .service__block :is(h3, h4) { margin-bottom: var(--s-3); font: 600 1rem var(--font-body); letter-spacing: 0; color: var(--c-ink); }
   .service__block--need {
     grid-column: 1 / -1; padding: var(--s-4) var(--s-5);
     background: var(--c-marigold-wash); border-radius: var(--r-md);
   }
-  .service__block--need h3 { margin-bottom: var(--s-1); }
+  .service__block--need :is(h3, h4) { margin-bottom: var(--s-1); }
   .service__block--need p { color: var(--c-ink); }
   @media (max-width: 40rem) { .service__spec { grid-template-columns: minmax(0, 1fr); } }
 
   /* =======================================================================
-     3. PROFIT CALCULATOR
+     3. CORE PLANS
+     Each plan is its own band with its own sticky menu (.services-layout).
+     ======================================================================= */
+  .page-services { counter-reset: plan; }
+
+  /* Overview cards */
+  .plan-cards { list-style: none; padding: 0; counter-reset: card; }
+  .plan-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-3); counter-increment: card; border-top: 4px solid var(--c-marigold); }
+  .plan-card::before {
+    content: counter(card, decimal-leading-zero);
+    font: 700 var(--step--1) var(--font-display); letter-spacing: 0.08em; color: var(--c-slate);
+  }
+  .plan-card h3 { font-size: var(--step-2); }
+  .plan-card h3 a { color: inherit; text-decoration: none; }
+  .plan-card p { flex: 1; color: var(--c-slate); }
+  .plan-card .btn { margin-top: var(--s-2); }
+
+  /* Plan header */
+  .plan { counter-increment: plan; scroll-margin-top: var(--header-h); }
+  .plan__head { max-width: 46rem; margin-bottom: var(--s-7); }
+  .plan__eyebrow { font-size: var(--step--1); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-marigold-dark); }
+  .plan__eyebrow::after { content: " " counter(plan, decimal-leading-zero); color: var(--c-slate); }
+  .plan__head h2 { margin-top: var(--s-2); font-size: var(--step-4); }
+  .plan__summary { margin-top: var(--s-3); font-size: var(--step-1); color: var(--c-slate); }
+  .plan .service__head :is(h2, h3) { font-size: var(--step-2); }
+  .plan .service__head + * { margin-top: var(--s-3); }
+
+  /* Plan 3 scope: eight numbered research stages */
+  .scope-steps { list-style: none; padding: 0; display: grid; gap: var(--s-4); counter-reset: scope; }
+  .scope-steps li { position: relative; display: grid; gap: var(--s-1); padding-left: 3rem; counter-increment: scope; max-width: var(--measure); }
+  .scope-steps li::before {
+    content: counter(scope); position: absolute; left: 0; top: 0;
+    display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
+    background: var(--c-ink); color: #fff; font: 700 0.85rem/1 var(--font-display);
+  }
+  .scope-steps strong { font-weight: 700; }
+  .scope-steps span { color: var(--c-slate); }
+
+  /* Deliverable and commitment notes */
+  .callout {
+    max-width: 44rem; padding: var(--s-4) var(--s-5);
+    background: var(--c-blue-wash); border-left: 4px solid var(--c-blue); border-radius: var(--r-md); color: var(--c-ink);
+  }
+  .callout--note { margin-top: var(--s-4); background: var(--c-marigold-wash); border-left-color: var(--c-marigold-dark); font-weight: 600; }
+
+  /* =======================================================================
+     4. WORKFLOW
+     Step numbers come from CSS counters: reorder or add a stage in the HTML
+     and the numbers (in the cards and in the menu) renumber themselves.
+     ======================================================================= */
+  .workflow .services-list { counter-reset: stage; }
+  .workflow .service { counter-increment: stage; }
+  .workflow .service__head::before {
+    content: "Step " counter(stage, decimal-leading-zero);
+    display: block; margin-bottom: var(--s-2);
+    font-size: var(--step--1); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-blue-dark);
+  }
+  .workflow .side-nav ol { counter-reset: navstep; }
+  .workflow .side-nav li { counter-increment: navstep; }
+  .workflow .side-nav a::before { content: counter(navstep, decimal-leading-zero); margin-right: var(--s-2); font-variant-numeric: tabular-nums; opacity: 0.55; }
+
+  /* =======================================================================
+     5. PROFIT CALCULATOR
      ======================================================================= */
   .calc { display: grid; gap: var(--s-6); grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: start; }
   @media (max-width: 56rem) { .calc { grid-template-columns: minmax(0, 1fr); } }

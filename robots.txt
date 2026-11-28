@@ -1,5 +1,23 @@
-# Allow everything; point crawlers at the sitemap.
+# NEXERA Metrics: public pages may be read by search engines and AI assistants.
+# No private areas exist on this site; nothing sensitive is published here.
 User-agent: *
 Allow: /
 
-Sitemap: https://www.nexera.example/sitemap.xml
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://nexerametrics.web.app/sitemap.xml
